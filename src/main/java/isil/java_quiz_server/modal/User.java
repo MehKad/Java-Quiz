@@ -10,7 +10,7 @@ public class User {
     @GeneratedValue
     private Long id;
     private String username, password, email;
-    private Number phone;
+    private int phone;
     private Boolean is_teacher;
 
     public Long getId() {
@@ -49,7 +49,7 @@ public class User {
         return phone;
     }
 
-    public void setPhone(Number phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
