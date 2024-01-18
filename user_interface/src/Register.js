@@ -6,26 +6,21 @@ import "react-toastify/dist/ReactToastify.css";
 import "./style/Register.css";
 
 const Register = () => {
-  const navigate = useNavigate(); // Use useNavigate hook for navigation
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [phone, setPhone] = useState();
   const [password, setPassword] = useState("");
-  const [Cpassword, setCPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState();
+  const [isTeacher, setTeacher] = useState(false);
 
   const handleRegister = async () => {
-    if (password !== Cpassword) {
-      toast.error("Password and confirm password do not match.");
-      return;
-    }
-
     try {
-      const response = await axios.post("http://localhost:5000/api/register", {
+      const response = await axios.post("http://localhost:8080/register", {
         email,
         username,
         phone,
         password,
-        Cpassword,
+        isTeacher,
       });
 
       console.log(response.data);
@@ -33,19 +28,8 @@ const Register = () => {
 
       navigate("/");
     } catch (error) {
-      if (error.response) {
-        if (error.response.status === 400 && error.response.data.error) {
-          toast.error(error.response.data.error);
-        } else {
-          console.error("Registration error:", error.response.data);
-          toast.error(
-            "Registration failed. Please check your input and try again."
-          );
-        }
-      } else {
-        console.error("Registration error:", error.message);
-        toast.error("An unexpected error occurred. Please try again later.");
-      }
+      console.error(error);
+      toast.error("An unexpected error occurred. Please try again later.");
     }
   };
 
@@ -105,13 +89,16 @@ const Register = () => {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
-            type="password"
-            className="pass"
-            placeholder="Confirm password"
-            onChange={(e) => setCPassword(e.target.value)}
-          />
-
+          <div className="teacher-checkbox">
+            <label>
+              <input
+                type="checkbox"
+                checked={isTeacher}
+                onChange={() => setTeacher(!isTeacher)}
+              />
+              Are you a teacher?
+            </label>
+          </div>
           <button className="register" onClick={handleRegister}>
             Register
           </button>

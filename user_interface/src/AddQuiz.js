@@ -42,7 +42,7 @@ const AddQuiz = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/add", quiz);
+      const response = await axios.post("http://localhost:8080/quizzes", quiz);
       console.log(response.data);
       toast.success("Added successful!");
       navigate("/home");

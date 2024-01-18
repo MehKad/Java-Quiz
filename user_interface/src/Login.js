@@ -10,13 +10,13 @@ const Login = () => {
   const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
-  const [idUser, setIdUser] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
-        idUser,
+      const response = await axios.post("http://localhost:8080/login", {
+        username,
         password,
       });
 
@@ -41,10 +41,6 @@ const Login = () => {
       }
     }
   };
-
-  // const handleNavigation = (data) => {
-  // navigate("/home", { state: { yourDataKey: data } });
-  // };
 
   return (
     <>
@@ -80,9 +76,9 @@ const Login = () => {
           <h1 className="div-3">Sign in</h1>
           <input
             type="text"
-            className="email"
-            placeholder="Enter email or username"
-            onChange={(e) => setIdUser(e.target.value)}
+            className="username"
+            placeholder="Enter your username"
+            onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"

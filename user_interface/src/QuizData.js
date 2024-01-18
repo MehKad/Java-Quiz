@@ -15,10 +15,9 @@ const QuizData = () => {
   useEffect(() => {
     const fetchQuizDetails = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/Quiz/${id}`
-        );
+        const response = await axios.get(`http://localhost:8080/quizzes/${id}`);
         setQuizDetails(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching quiz details:", error);
       }
@@ -45,7 +44,7 @@ const QuizData = () => {
           <h1 className="quiz-title">Quiz Details</h1>
         </div>
         {quizDetails.questions?.map((i, questionIndex) => (
-          <div key={i._id} className="question-container">
+          <div key={i.id} className="question-container">
             <p className="question-text">{i.text}</p>
             <ul className="options-list">
               {i.options?.map((option, index) => (
