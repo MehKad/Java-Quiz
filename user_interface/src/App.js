@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
+import Home from "./Home";
+import QuizData from "./QuizData";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AddQuiz from "./AddQuiz";
+import { UserContext } from "./userContext";
 
-function App() {
+const App = () => {
+  const { user } = useContext(UserContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={user ? <Home /> : <Navigate to="/" />} />
+        <Route
+          path="/quiz/:id"
+          element={user ? <QuizData /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/addQuiz"
+          element={user ? <AddQuiz /> : <Navigate to="/" />}
+        />
+      </Routes>
+      <ToastContainer />
+    </Router>
   );
-}
+};
 
 export default App;
