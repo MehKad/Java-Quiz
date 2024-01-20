@@ -42,7 +42,9 @@ These instructions will get you a copy of the project up and running on your loc
    git clone https://github.com/mehkad/Java-Quiz.git
    ```
 
-2. Go to `./srsc/main/resources/application.properties` and change what seems convinient for your usage:
+2. Run phpmyadmin from wamp server and create a database
+   
+3. Go to `./srsc/main/resources/application.properties` and change what seems convinient for your usage:
 
    ```
 
@@ -52,8 +54,8 @@ These instructions will get you a copy of the project up and running on your loc
     spring.datasource.password=
     spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
    ```
-
-3. Go to `./user_interface` and run the following :
+   
+4. Go to `./user_interface` and run the following :
 
    ```
        npm i
@@ -72,7 +74,7 @@ To run the project, you have to run the server part and the client's ui :
 2. To start the ui part, navigate to `./user_interface` and run the following:
 
    ```
-   npm run
+   npm start
    ```
 
 The application will start running on http://localhost:3000
